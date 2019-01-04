@@ -12,10 +12,11 @@ var tokenLocation = path.join(os.homedir(), ".google_oauth_token");
 
 var getClient = function() {
   var auth = new google.auth.OAuth2(clientID, secret, "http://localhost:8000/authenticate/");
+  var tokens = {};
 
   try {
-    var tokens = fs.readFileSync(tokenLocation, "utf-8");
-    tokens = JSON.parse(tokens);
+    var json = fs.readFileSync(tokenLocation, "utf-8");
+    tokens = JSON.parse(json);
     auth.setCredentials(tokens);
   } catch (err) {
     console.log("Unable to load existing tokens");
@@ -40,7 +41,8 @@ var authenticate = function(permissions = []) {
     ].concat(permissions);
     var authURL = client.generateAuthUrl({
       access_type: "offline",
-      scope: scopes.join(" ")
+      scope: scopes.join(" "),
+      prompt: "consent"
     });
 
     var onRequest = function(request, response) {
