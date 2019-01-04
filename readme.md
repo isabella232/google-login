@@ -1,0 +1,3 @@
+This is a utility library for logging into Google using the same environment variables and token file as [Dailygraphics Next](https://github.com/nprapps/dailygraphics-next) and the [Interactive Template](https://github.com/nprapps/interactive-template). You can use this programmatically, in which case it provides an async `authenticate()` function that takes an optional list of additional OAuth scopes, or you can use it from the command line if it's installed globally.
+
+It's mostly meant for use in writing one-off scripts at NPR, and doesn't make a lot of sense for anyone else.
